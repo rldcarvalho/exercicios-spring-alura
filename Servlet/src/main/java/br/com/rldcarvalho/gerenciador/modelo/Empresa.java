@@ -1,4 +1,4 @@
-package br.com.rldcarvalho.gerenciador.servlet;
+package br.com.rldcarvalho.gerenciador.modelo;
 
 import java.util.Date;
 
