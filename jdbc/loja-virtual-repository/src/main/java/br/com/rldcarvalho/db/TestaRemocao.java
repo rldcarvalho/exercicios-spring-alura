@@ -1,8 +1,8 @@
 package br.com.rldcarvalho.db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class TestaRemocao {
 
@@ -10,8 +10,9 @@ public class TestaRemocao {
 
         Connection connection = new ConnectionFactory().recuperarConexao();
 
-        Statement statement = connection.createStatement();
-        statement.execute("DELETE FROM PRODUTO WHERE ID > 2");
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID > ?");
+        statement.setInt(1, 2);
+        statement.execute();
 
         int linhasModificadas = statement.getUpdateCount();
 

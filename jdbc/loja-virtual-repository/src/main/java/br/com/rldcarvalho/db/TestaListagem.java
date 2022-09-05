@@ -1,9 +1,9 @@
 package br.com.rldcarvalho.db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class TestaListagem {
 
@@ -11,8 +11,8 @@ public class TestaListagem {
 
         Connection connection = new ConnectionFactory().recuperarConexao();
 
-        Statement statement = connection.createStatement();
-        statement.execute("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
+        PreparedStatement statement = connection.prepareStatement("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
+        statement.execute();
 
         ResultSet resultSet = statement.getResultSet();
 
