@@ -14,8 +14,10 @@ public class TestaRemocao {
         statement.setInt(1, 2);
         statement.execute();
 
-        int linhasModificadas = statement.getUpdateCount();
+        Integer linhasModificadas = statement.getUpdateCount();
 
         System.out.println("Quantidade de linhas que foram modificadas: " + linhasModificadas);
+        statement.close();
+        connection.close();
     }
 }
