@@ -5,21 +5,24 @@ import javax.persistence.*;
 @Entity
 @Table(name="categorias")
 public class Categoria {
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nome;
+//    @Id
+//    @Column(name = "id", nullable = false)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+
+    @EmbeddedId
+    private CategoriaId id;
+
 
     public Categoria() {
     }
 
     public Categoria(String nome) {
-        this.nome = nome;
+        this.id = new CategoriaId(nome, "geral");
     }
 
     public String getNome() {
-        return nome;
+        return this.id.getNome();
     }
 
     public void setNome(String nome) {
