@@ -1,8 +1,10 @@
 package br.com.rldcarvalho.spring.data.service;
 
 import br.com.rldcarvalho.spring.data.orm.Funcionario;
+import br.com.rldcarvalho.spring.data.orm.FuncionarioProjecao;
 import br.com.rldcarvalho.spring.data.repository.FuncionarioRepository;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.ls.LSOutput;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,6 +29,7 @@ public class RelatoriosService {
             System.out.println("1 - Busca funcionario nome");
             System.out.println("2 - Busca funcionario nome, data contratação e salario maior");
             System.out.println("3 - Busca funcionario data contratação");
+            System.out.println("4 - Pesquisa funcionario salario");
 
 
             int action = scanner.nextInt();
@@ -41,6 +44,9 @@ public class RelatoriosService {
                     break;
                 case 3:
                     buscaFuncionarioDataContratacao(scanner);
+                    break;
+                case 4:
+                    pesquisaFuncionarioSalario();
                     break;
                 default:
                     system = false;
@@ -78,5 +84,10 @@ public class RelatoriosService {
         LocalDate localDate = LocalDate.parse(data, formatter);
         List<Funcionario> list = funcionarioRepository.findDataContratacaoMaior(localDate);
         list.forEach(System.out::println);
+    }
+
+    private void pesquisaFuncionarioSalario(){
+        List<FuncionarioProjecao> list = funcionarioRepository.findFuncionarioSalario();
+        list.forEach(f -> System.out.println("Funcionario: { id: " + f.getId() + " | nome: " + f.getNome() + " | salario: " + f.getSalario() + "}"));
     }
 }
