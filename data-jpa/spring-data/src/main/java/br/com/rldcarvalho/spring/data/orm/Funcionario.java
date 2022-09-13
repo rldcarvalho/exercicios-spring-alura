@@ -17,7 +17,7 @@ public class Funcionario {
     private Long id;
     private String nome;
     private String cpf;
-    private BigDecimal salario;
+    private Double salario;
     private LocalDate dataContratacao = LocalDate.now();
     @ManyToOne
     @JoinColumn(name = "cargo_id", nullable = false)
@@ -53,11 +53,11 @@ public class Funcionario {
         this.cpf = cpf;
     }
 
-    public BigDecimal getSalario() {
+    public Double getSalario() {
         return salario;
     }
 
-    public void setSalario(BigDecimal salario) {
+    public void setSalario(Double salario) {
         this.salario = salario;
     }
 

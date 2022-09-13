@@ -2,9 +2,11 @@ package br.com.rldcarvalho.spring.data.service;
 
 import br.com.rldcarvalho.spring.data.orm.UnidadeTrabalho;
 import br.com.rldcarvalho.spring.data.repository.UnidadeTrabalhoRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Scanner;
 
+@Service
 public class CrudUnidadeTrabalhoService {
 
     private Boolean system = true;

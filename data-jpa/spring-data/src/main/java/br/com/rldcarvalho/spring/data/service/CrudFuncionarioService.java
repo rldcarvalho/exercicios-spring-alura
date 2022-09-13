@@ -6,6 +6,7 @@ import br.com.rldcarvalho.spring.data.orm.UnidadeTrabalho;
 import br.com.rldcarvalho.spring.data.repository.CargoRepository;
 import br.com.rldcarvalho.spring.data.repository.FuncionarioRepository;
 import br.com.rldcarvalho.spring.data.repository.UnidadeTrabalhoRepository;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,13 +16,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+@Service
 public class CrudFuncionarioService {
 
     private Boolean system = true;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    private final FuncionarioRepository funcionarioRepository;
     private final CargoRepository cargoRepository;
+    private final FuncionarioRepository funcionarioRepository;
     private final UnidadeTrabalhoRepository unidadeTrabalhoRepository;
 
     public CrudFuncionarioService(FuncionarioRepository funcionarioRepository, CargoRepository cargoRepository, UnidadeTrabalhoRepository unidadeTrabalhoRepository) {
@@ -70,7 +72,7 @@ public class CrudFuncionarioService {
         System.out.println("Digite o cpf");
         String cpf = scanner.next();
         System.out.println("Digite o salario");
-        BigDecimal salario = scanner.nextBigDecimal();
+        Double salario = scanner.nextDouble();
         System.out.println("Digite a data de contratação");
         String dataContratacao = scanner.next();
         System.out.println("Digite o cargoId");
@@ -118,7 +120,7 @@ public class CrudFuncionarioService {
         System.out.println("Digite o cpf");
         String cpf = scanner.next();
         System.out.println("Digite o salario");
-        BigDecimal salario = scanner.nextBigDecimal();
+        Double salario = scanner.nextDouble();
         System.out.println("Digite a data de contratação");
         String dataContratacao = scanner.next();
         System.out.println("Digite o cargoId");
