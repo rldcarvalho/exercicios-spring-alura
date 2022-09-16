@@ -1,11 +1,18 @@
 package br.com.rldcarvalho.mvc.mudi.dto;
 
+
+
+import javax.validation.constraints.NotEmpty;
+
 import br.com.rldcarvalho.mvc.mudi.model.Pedido;
 
 public class RequisicaoNovoPedido {
 	
+	@NotEmpty
 	private String nomeProduto;
+	@NotEmpty
 	private String urlProduto;
+	@NotEmpty
 	private String urlImagem;
 	private String descricao;
 	
