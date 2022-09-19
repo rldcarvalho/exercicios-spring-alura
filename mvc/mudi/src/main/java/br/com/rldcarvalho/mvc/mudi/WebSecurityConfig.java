@@ -18,23 +18,15 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-			.authorizeHttpRequests((requests) -> {
-				try {
-					requests
+			.authorizeHttpRequests((requests) -> requests
 //				.antMatchers("/", "/home").permitAll()
-						.anyRequest().authenticated()
-						.and().httpBasic();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			);
-//			.formLogin((form) -> form
-//				.loginPage("/login")
-//				.permitAll()
-//			)
-//			.logout((logout) -> logout.permitAll());
+				.anyRequest().authenticated()
+			)
+			.formLogin((form) -> form
+				.loginPage("/login")
+				.permitAll()
+			)
+			.logout((logout) -> logout.permitAll());
 
 		return http.build();
 	}
