@@ -2,6 +2,7 @@ package br.com.rldcarvalho.mvc.mudi.repository;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,8 @@ import br.com.rldcarvalho.mvc.mudi.model.StatusPedido;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
-
+	
+	@Cacheable("books")
 	List<Pedido> findByStatus(StatusPedido status, Pageable sort);
 
 	@Query("SELECT p FROM Pedido p JOIN p.user u WHERE u.username = :username")
