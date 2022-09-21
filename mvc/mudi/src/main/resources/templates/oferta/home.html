@@ -1,49 +1,78 @@
 <html>
 <head th:replace="~{base::head}"></head>
-<body>
+<body onload="onLoad()">
 	<div th:replace="~{base::logo}"></div>
-	<div class="container">
+	
+	<div class="container" id="ofertas">
 		<div th:replace="~{base::titulo('Últimos Pedidos')}"></div>
 
 		
 
-		<div class="card mb-3" th:each="pedido : ${pedidos}">
-				<div class="alert alert-dark"
-					th:text="${pedido.nomeProduto}">Nome do Produto</div>
+		<div class="card mb-3" v-for="pedido in pedidos">
+				<div class="alert alert-dark">{{pedido.nomeProduto}}</div>
 			<div class="card-body">
 				<div class="row">
 					<div class="col-12 col-sm-8 mb-3">
 
 						<div class="row">
 							<div class="col-md-5">
-								Valor: <span th:if="${pedido.valorNegociado} != null" th:text="${'R$ ' + #numbers.formatDecimal(pedido.valorNegociado,3,'POINT',2,'COMMA')}">200,99</span>
+								Valor: <input />
 							</div>
 							<div class="col-md-7">
-								Data da entrega: <span th:text="${#temporals.format(pedido.dataDaEntrega, 'dd/MM/yyyy')}">01/01/2022</span>
+								Data da entrega: <input />
 							</div>
 						</div>
 
 						<div>Produto</div>
 						<div>
-							<input class="form-control" th:value="${pedido.urlProduto}"
-								value="url do produto" />
+							<a v-bind:href="pedido.urlProduto">{{pedido.nomeProduto}}</a>
 						</div>
 
 						<div>Descrição</div>
 						<div>
-							<textarea class="form-control" th:text="${pedido.descricao}">Descrição do pedido</textarea>
+							<textarea class="form-control">{{pedido.descricao}}</textarea>
 						</div>
 					</div>
 
 					<div class="col-12 col-sm-4">
 						<div>
-							<img class="img-thumbnail" th:src="${pedido.urlImagem}" src="">
+							<img class="img-thumbnail" v-bind:src="pedido.urlImagem"/>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		function onLoad(){
+			var app = new Vue({
+				  el: '#ofertas',
+				  data: {
+				    pedidos: [
+				    	   {
+			    		      "nomeProduto":"Echo Dot",
+			    		      "valorNegociado":300.00,
+			    		      "dataDaEntrega":"2022-09-27",
+			    		      "urlProduto":"https://www.amazon.com.br/dp/B084DWCZY6/?_encoding=UTF8&pf_rd_p=692b92cb-6988-4e16-9287-c83e65e63f06&pd_rd_wg=UzAqJ&pf_rd_r=QXBEGGCCWYX0F8ACX3WB&content-id=amzn1.sym.692b92cb-6988-4e16-9287-c83e65e63f06&pd_rd_w=k1L3K&pd_rd_r=6b60c85e-809b-45ed-9ad6-48c395e65b21&ref_=pd_gw_unk",
+			    		      "urlImagem":"https://m.media-amazon.com/images/I/714Rq4k05UL._AC_SY450_.jpg",
+			    		      "descricao":"Echo Dot (4ª Geração): Smart Speaker com Alexa - Cor Preta",
+			    		      "status":"AGUARDANDO"
+				    		},
+				    		{
+			    		      "nomeProduto":"Kindle 11ª Geração",
+			    		      "valorNegociado":null,
+			    		      "dataDaEntrega":null,
+			    		      "urlProduto":"https://www.amazon.com.br/dp/B09SWTG9GF?pf_rd_r=3JTRJN43TRVASSZ2A7CG&pf_rd_p=1f0425c2-3d67-45e8-a18d-b06503872a24&pd_rd_r=d026fe44-ebad-4b83-9131-c02254cf140b&pd_rd_w=e9863&pd_rd_wg=U0DNM&ref_=pd_gw_unk",
+			    		      "urlImagem":"https://m.media-amazon.com/images/I/71B1wzw1LkL._AC_SX679_.jpg",
+			    		      "descricao":"Novo Kindle 11ª Geração (lançamento 2022) – Mais leve, com resolução de 300 ppi e o dobro de armazenamento - Cor Preta",
+			    		      "status":"AGUARDANDO"
+				    		 
+				  			}]
+				  		}
+				});
+		}
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </body>
 
 </html>
