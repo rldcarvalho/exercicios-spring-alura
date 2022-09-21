@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Pedido {
 	
@@ -31,6 +33,7 @@ public class Pedido {
 	private StatusPedido status;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private User user;
 	
 	
