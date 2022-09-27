@@ -4,15 +4,14 @@ import br.com.rldcarvalho.forum.controller.dto.DetalhesTopicoDto;
 import br.com.rldcarvalho.forum.controller.dto.TopicoDto;
 import br.com.rldcarvalho.forum.controller.form.AtualizacaoTopicoForm;
 import br.com.rldcarvalho.forum.controller.form.TopicoForm;
-import br.com.rldcarvalho.forum.modelo.Curso;
 import br.com.rldcarvalho.forum.modelo.Topico;
 import br.com.rldcarvalho.forum.repository.CursoRepository;
 import br.com.rldcarvalho.forum.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -20,8 +19,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -35,9 +32,8 @@ public class TopicosController {
 
     @GetMapping
     public Page<TopicoDto> lista(@RequestParam(required = false) String nomeCurso,
-                                 @RequestParam int pagina, @RequestParam int qtd, @RequestParam String ordenacao){
+                                 @PageableDefault(sort = "id", direction = Sort.Direction.DESC, page = 0, size = 10) Pageable paginacao){
 
-        Pageable paginacao = PageRequest.of(pagina, qtd, Sort.Direction.ASC, ordenacao);
 
         if (nomeCurso == null){
             Page<Topico> topicos = topicoRepository.findAll(paginacao);
