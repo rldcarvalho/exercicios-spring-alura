@@ -14,6 +14,8 @@ public record PacienteDto (
     String email,
     @NotBlank
     String telefone,
+    @NotBlank
+    String cpf,
     @NotNull
     @Valid
     EnderecoDto endereco) {
