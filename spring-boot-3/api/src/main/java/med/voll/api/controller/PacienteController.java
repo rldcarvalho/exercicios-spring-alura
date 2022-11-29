@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.controller.dto.PacienteDto;
 import med.voll.api.controller.dto.PacienteExportDto;
+import med.voll.api.controller.dto.PacienteUpdateDto;
 import med.voll.api.model.Paciente;
 import med.voll.api.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,12 @@ public class PacienteController {
     @GetMapping
     public Page<PacienteExportDto> listar(@PageableDefault(size = 10, sort = "nome") Pageable paginacao){
         return pacienteRepository.findAll(paginacao).map(PacienteExportDto::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody PacienteUpdateDto dados){
+        Paciente paciente = pacienteRepository.getReferenceById(dados.id());
+        paciente.atualizar(dados);
     }
 }
